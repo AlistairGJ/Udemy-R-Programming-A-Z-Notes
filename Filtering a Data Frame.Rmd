@@ -76,7 +76,11 @@ ds[ds$Coles < 5 & ds$Woolworths < 5,]
 ds[ds$`Native Category` == "HEALTH & BEAUTY",]
 ```
 
+## Quickly check Categories - didn't work =(
 
+```{r}
+levels(ds$`Allocated Category`)
+```
 
 
 

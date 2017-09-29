@@ -1,0 +1,78 @@
+---
+title: "Introduction to QPLOT"
+author: "via Udemy"
+date: "29/09/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+ 
+## Description
+
+Qplot part of ggplot2 (and both can work with dataframes). Price Wars data set gathered by AGJ.
+
+## Packages + Data
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(gsheet)
+library(vembedr)
+library(gridExtra)
+library("htmltools")
+df <- gsheet2tbl('https://drive.google.com/open?id=1_6RZ0HXg7VbgO78oyFfUyZaFOUHYWijy8XH1_jw5tA4')
+```
+
+## Using QPLOT - basic, count for one attribute
+Pass qplot some data (first argument), with one attribute from data set - gives histogram in this case.
+
+```{r}
+qplot(data=ds, x=Coles)
+```
+
+## Using QPLOT - show values from multiple attibutes
+Pass qplot some data (first argument), with an attribute. Gives histogram in this case.
+
+```{r}
+qplot(data=ds, x=Coles, y=ds$`Allocated Category`)
+```
+
+# To set aesthetics, wrap in I()
+If not wrapped in I, qplot will try to 'wrap'.
+```{r}
+qplot(data=ds, x=Coles, y=ds$`Allocated Category`, size=I(5))
+```
+
+# To set aesthetics, wrap in I()
+If not wrapped in I, qplot will try to 'wrap'.
+```{r}
+qplot(data=ds, x=Coles, y=ds$`Allocated Category`, size=I(2), colour=I("Blue"))
+```
+
+# Change the geometry
+From what is default to box plot. PROBLEM - only shows lines (not correct box plots) FLIP THE x and y (not the catergorical data).
+```{r}
+qplot(data=ds, x=Coles, y=ds$`Allocated Category`, geom="boxplot")
+```
+
+# Change the geometry - for box, x = categorical, y = continuous!!!
+From what is default to box plot. PROBLEM - only shows lines (not correct box plots) FLIP THE x and y.
+```{r}
+qplot(data=ds, x=ds$`Allocated Category`, y=Coles, geom="boxplot")
+```
+
+# Change the geometry - Bar Graph
+
+```{r}
+qplot(data=ds, x=ds$`Allocated Category`, stat ="count", colour=ds$`Allocated Category`)
+```
+
+
+```{r}
+
+```
+
+
+

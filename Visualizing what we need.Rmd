@@ -1,0 +1,61 @@
+---
+title: "Visualizing what we need"
+author: "via Udemy"
+date: "29/09/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+ 
+## Description
+
+Qplot part of ggplot2 (and both can work with dataframes). Price Wars data set gathered by AGJ.
+
+## Packages + Data
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(gsheet)
+library(vembedr)
+library(gridExtra)
+library("htmltools")
+df <- gsheet2tbl('https://drive.google.com/open?id=1_6RZ0HXg7VbgO78oyFfUyZaFOUHYWijy8XH1_jw5tA4')
+```
+
+# Scatter using two numerical values
+
+In black we have no way of determining if from Coles or WW...
+
+```{r}
+qplot(data=ds, x=Coles, y=Woolworths, main = 'Woolworths versus Coles Full Price Scatter Plot',  ylab = 'Woolworths Items (AUD)', xlab = 'Coles Items (AUD)')
+```
+
+```{r}
+qplot(data=ds, x=ds$`Coles Sale`, y=ds$`Woolworths Sale`, main = 'Woolworths Sale versus Coles Sale Scatter Plot',  ylab = 'Woolworths Sale Items (AUD)', xlab = 'Coles Sale Items (AUD)')
+```
+
+Again - in black, we have no way of determining if the items are from Coles or WW
+
+# Scatter using two numerical values - adjust size
+Recall - "Mapping is when we are assigning a parameter"
+
+```{r}
+qplot(data=ds, x=ds$`Coles Sale`, y=ds$`Woolworths Sale`, size = I(1), main = 'Woolworths Sale versus Coles Sale Scatter Plot',  ylab = 'Woolworths Sale Items (AUD)', xlab = 'Coles Sale Items (AUD)')
+```
+
+# Scatter using two numerical values - same colour for all
+
+```{r}
+qplot(data=ds, x=ds$`Coles Sale`, y=ds$`Woolworths Sale`, colour = I("Red"), size = I(1), main = 'Woolworths Sale versus Coles Sale Scatter Plot',  ylab = 'Woolworths Sale Items (AUD)', xlab = 'Coles Sale Items (AUD)')
+```
+
+
+
+
+
+
+
+
