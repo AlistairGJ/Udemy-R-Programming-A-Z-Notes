@@ -25,19 +25,56 @@ library("htmltools")
 df <- gsheet2tbl('https://drive.google.com/open?id=1_6RZ0HXg7VbgO78oyFfUyZaFOUHYWijy8XH1_jw5tA4')
 ```
 
-## Filtering for Specific Rows
+## Filtering for Specific Rows (price Coles greater than 10)
 
-Here we would only want to look at a specific row number (for example)
+Here we would only want to look at a values in the df data set for the column Coles, wehere the value is greater than 10. This will return true and false values (if the condition is satisfied or not). What is returned is a vector.
 
 ```{r}
 df$Coles > 10
 ```
 
+Put the vector into an object (call in filter). Can use this filter to throw back values from the original data. Everytime a TRUE occurs, row will be displayed, and likewise, everytime a FALSE occurs, row will not be displayed. 
 
+```{r}
+filter <- df$Coles > 10
+df[filter,]
+```
 
+## Filtering for Specific Rows (price Coles less than 5)
 
+With not 'intermediate' step.
 
+```{r}
+df[df$Coles < 5,]
+```
 
+## Filtering for Specific Rows (Allocated Category = Beauty, Sugary Snack, Diet / Gym Food, Supplment)
+Line 1 = Creating the filter
+Line 2 = Creating the dataset (for Coles, Coles Sale, Woolworths, Woolworths Sale)
+```{r}
+beauty_filter <- ds$`Allocated Category` == "Beauty"
+beauty_data <- ds[beauty_filter,]
+sugarySnack_filter <- ds$`Allocated Category` == "Sugary Snack"
+sugarySnack_data <- ds[sugarySnack_filter,]
+dietGymFood_filter <- ds$`Allocated Category` == "Diet/ Gym Food"
+dietGymFood_data <- ds[dietGymFood_filter,]
+supplement_filter <- ds$`Allocated Category` == "Supplement"
+supplement_data <- ds[supplement_filter,]
+```
+
+## Filtering for More than 1 Condition
+
+- Don't forget comma (,) at the end before ]
+
+```{r}
+ds[ds$Coles < 5 & ds$Woolworths < 5,]
+```
+
+## Filtering by Categorical Value
+
+```{r}
+ds[ds$`Native Category` == "HEALTH & BEAUTY",]
+```
 
 
 
