@@ -39,23 +39,35 @@ qplot(data=ds, x=ds$`Coles Sale`, y=ds$`Woolworths Sale`, main = 'Woolworths Sal
 
 Again - in black, we have no way of determining if the items are from Coles or WW
 
-# Scatter using two numerical values - adjust size
+# Scatter - adjust size
 Recall - "Mapping is when we are assigning a parameter"
 
 ```{r}
 qplot(data=ds, x=ds$`Coles Sale`, y=ds$`Woolworths Sale`, size = I(1), main = 'Woolworths Sale versus Coles Sale Scatter Plot',  ylab = 'Woolworths Sale Items (AUD)', xlab = 'Coles Sale Items (AUD)')
 ```
 
-# Scatter using two numerical values - same colour for all
+# Scatter - same colour for all
 
 ```{r}
 qplot(data=ds, x=ds$`Coles Sale`, y=ds$`Woolworths Sale`, colour = I("Red"), size = I(1), main = 'Woolworths Sale versus Coles Sale Scatter Plot',  ylab = 'Woolworths Sale Items (AUD)', xlab = 'Coles Sale Items (AUD)')
 ```
 
+# Scatter - mapping colour
+
+```{r}
+qplot(data=ds, x=Coles, y=Woolworths, colour = ds$`Allocated Category`, main = 'Woolworths versus Coles Full Price Scatter Plot',  ylab = 'Woolworths Items (AUD)', xlab = 'Coles Items (AUD)') + theme(legend.title=element_blank())
+```
 
 
+```{r}
+qplot(data=ds, x=ds$`Coles Sale`, y=ds$`Woolworths Sale`, colour = ds$`Allocated Category`, main = 'Woolworths Sale versus Coles Sale Scatter Plot',  ylab = 'Woolworths Sale Items (AUD)', xlab = 'Coles Sale Items (AUD)') + theme(legend.title=element_blank())
+```
 
+```{r}
+qplot(data=ds, x=ds$`Woolworths Sale`, y=Woolworths, colour = ds$`Allocated Category`, main = 'Woolworths Sale Price versus Woolworths Full Price Scatter Plot',  ylab = 'Full Price Items (AUD)', xlab = 'Sale Items (AUD)') + theme(legend.title=element_blank())
+```
 
-
-
+```{r}
+qplot(data=ds, x=ds$`Coles Sale`, y=Coles, colour = ds$`Allocated Category`, main = 'Coles Sale Price versus Coles Full Price Scatter Plot',  ylab = 'Full Price Items (AUD)', xlab = 'Sale Items (AUD)') + theme(legend.title=element_blank())
+```
 
