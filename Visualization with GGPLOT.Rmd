@@ -23,27 +23,73 @@ df <- gsheet2tbl('https://drive.google.com/open?id=1_6RZ0HXg7VbgO78oyFfUyZaFOUHY
 
 ## GGPLOT Function
 
-Lots of power and flexibility for visualization! superdatascience.com/datavisualization download (but will use )
+Lots of power and flexibility for visualization! superdatascience.com/datavisualization download (but will use Coles and Woolworths data set). Aesthetics - the mapping of data to the chart. Statistical transformation = doing something to your data that will enable you to visualize it in some way (eg histogram will inherently perform counts / establish density).
 
 ```{r}
+# Grammar of Graphics
 
 ```
 
-
+## Aesthetics
+Most basic form contains specify data set, and the aesthetic for mapping the data to the function. 
 ```{r}
+ggplot(data=ds, aes(x=ds$'Allocated Category', y=Coles))
+```
 
+## Aesthetics + Geometry
+```{r}
+ggplot(data=ds, aes(x=ds$'Allocated Category', y=Coles)) + geom_boxplot()
 ```
 
 
+## Aesthetics + Geometry + Colour
 ```{r}
+ggplot(data=ds, aes(x=ds$'Allocated Category', y=Coles, colour = ds$`Allocated Category`)) + 
+  geom_boxplot()
+```
 
+## Aesthetics + Geometry + Colour (inside)
+```{r}
+ggplot(data=ds, aes(x=ds$'Allocated Category', y=Coles, fill = ds$`Allocated Category`)) + 
+  geom_boxplot() + theme(legend.title=element_blank())
+```
+
+## Aesthetics + Geometry + Colour (inside) + SIZE mapping
+```{r}
+ggplot(data=ds, aes(x=ds$'Allocated Category', y=Coles, size = Amount, colour = ds$`Allocated Category`)) + 
+  geom_point() + theme(legend.title=element_blank())
+```
+
+## LAYERS + Geometry + Colour (inside) + Labels
+```{r}
+colesHist <- ggplot(data=ds, aes(x=ds$'Allocated Category', y=Coles, fill = ds$`Allocated Category`))
+colesHist + geom_boxplot() + theme(legend.title=element_blank()) + labs(title = "test", x = "xtest") 
+```
+```{r}
+colesSaleHist <- ggplot(data=ds, aes(x=ds$'Allocated Category', y=ds$`Coles Sale`, colour = ds$`Allocated Category`))
+colesSaleHist + geom_jitter(size = 0.6) + geom_boxplot(alpha = 0.5) + theme(legend.title=element_blank()) + labs(title = "test", x = "xtest")
 ```
 
 
+## LAYERS + Geometry + Colour (inside) + Labels
+```{r}
+colesHist <- ggplot(data=ds, aes(x=ds$'Allocated Category', y=Coles, fill = ds$`Allocated Category`))
+test1 <- colesHist + geom_boxplot() + theme(legend.title=element_blank()) + labs(title = "test", x = "xtest") 
+```
+```{r}
+colesSaleHist <- ggplot(data=ds, aes(x=ds$'Allocated Category', y=ds$`Coles Sale`, colour = ds$`Allocated Category`))
+test2 <- colesSaleHist + geom_jitter(size = 0.6) + geom_boxplot(alpha = 0.5) + theme(legend.title=element_blank()) + labs(title = "test", x = "xtest")
+```
 
+```{r}
+grid.arrange(test1, test2)
+```
 
-
-
+```{r}
+#Exploring Unit and Amount - Stacked Histogram
+histAll <- ggplot(data=ds, aes(x=ds$Coles, fill = ds$`Allocated Category`))
+histAll + geom_histogram() + theme(legend.title=element_blank()) + labs(title = "test", x = "xtest") + facet_grid(ds$`Allocated Category`~.)
+```
 
 
 
