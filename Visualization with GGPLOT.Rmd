@@ -23,7 +23,7 @@ df <- gsheet2tbl('https://drive.google.com/open?id=1_6RZ0HXg7VbgO78oyFfUyZaFOUHY
 
 ## GGPLOT Function
 
-Lots of power and flexibility for visualization!
+Lots of power and flexibility for visualization! superdatascience.com/datavisualization download (but will use )
 
 ```{r}
 
