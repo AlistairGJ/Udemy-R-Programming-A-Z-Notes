@@ -71,3 +71,22 @@ qplot(data=ds, x=ds$`Woolworths Sale`, y=Woolworths, colour = ds$`Allocated Cate
 qplot(data=ds, x=ds$`Coles Sale`, y=Coles, colour = ds$`Allocated Category`, main = 'Coles Sale Price versus Coles Full Price Scatter Plot',  ylab = 'Full Price Items (AUD)', xlab = 'Sale Items (AUD)') + theme(legend.title=element_blank())
 ```
 
+## Shapes
+
+Google R shapes from ggplot codes.
+
+```{r}
+qplot(data=ds, x=ds$`Coles Sale`, y=Coles, colour = ds$`Allocated Category`, shape = I(17), main = 'Coles Sale Price versus Coles Full Price Scatter Plot',  ylab = 'Full Price Items (AUD)', xlab = 'Sale Items (AUD)') + theme(legend.title=element_blank())
+```
+
+```{r}
+qplot(data=ds, x=ds$`Coles Sale`, y=Coles, colour = ds$`Allocated Category`, shape = I(1), main = 'Coles Sale Price versus Coles Full Price Scatter Plot',  ylab = 'Full Price Items (AUD)', xlab = 'Sale Items (AUD)') + theme(legend.title=element_blank())
+```
+
+## Transparency - alpha = I(0 till 1)
+
+Use alpha = I(pass in 0 till 1).
+
+```{r}
+qplot(data=ds, x=ds$`Coles Sale`, y=Coles, colour = ds$`Allocated Category`, alpha = I(0.6), main = 'Coles Sale Price versus Coles Full Price Scatter Plot',  ylab = 'Full Price Items (AUD)', xlab = 'Sale Items (AUD)') + theme(legend.title=element_blank())
+```

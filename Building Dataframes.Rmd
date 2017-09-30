@@ -1,0 +1,68 @@
+---
+title: "Building Dataframes"
+author: "via Udemy"
+date: "30/09/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Description
+
+Learning how to create data frames.Example problem - need to produce more scatter plots, however this time they need to be categorised in such a way that the data set doesn't take into account in it's native structure. In our case, this could be produce an x, y scatter where the categories are Coles and Woolworths. As it currently stands, Coles, Coles Sale, Woolworths and Woolworths Sale columns contain pricing information, which in each row also has a native category. In the rows however, Coles, WW, Coles sale, WW sale, is not explicitely specified. THIS DOES NOT WORK!!! (As every product is at Coles, WW, Cole Sale, WW Sale already)...
+
+## Packages + Data
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(gsheet)
+library(vembedr)
+library(gridExtra)
+library("htmltools")
+df <- gsheet2tbl('https://drive.google.com/open?id=1_6RZ0HXg7VbgO78oyFfUyZaFOUHYWijy8XH1_jw5tA4')
+```
+
+## Creating Dataframe
+
+By stitching together a series of vectors. In this case we created vectors then stitched them together.
+
+```{r}
+vector1 <- df$Coles
+vector2 <- df$`Coles Sale`
+colesOnly <- data.frame(vector1, vector2)
+```
+
+## Change column names
+
+```{r}
+colnames(colesOnly) <- c("C", "CS")
+```
+
+## Create DB and Allocate Column Names in One Step
+
+Saves time, note the lack of use of quotation marks! Can also use with c bind and r bind functions.
+
+```{r}
+colesOnlyNew <- data.frame(C=vector1, CS=vector2)
+```
+
+## Merging Data Frames - need to CB
+
+Can acheive this through taking each row and (for example) matching by a common feature (like product name in our case). Always better to go with something code-based (like a unique primary key).
+
+```{r}
+#Pass left DF, pass right DR, and then how to match by.x and by.y
+colesOnly$newColumn <- colesOnly$CS * 100
+mergedDF <- merge(colesSale, colesOnly, by.x = "Coles Sale", by.y = "CS")
+#Did not work - threw back 4640 by 3 for size...
+```
+
+
+
+
+
+
+
