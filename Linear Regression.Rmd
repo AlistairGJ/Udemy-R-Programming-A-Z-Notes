@@ -1,0 +1,63 @@
+---
+title: "Linear Regression"
+author: "via Udemy"
+date: "01/10/2017"
+output: html_document
+---
+
+https://sejohnston.com/2012/08/09/a-quick-and-easy-function-to-plot-lm-results-in-r/
+
+```{r}
+wwVcoles <- ggplot(data=ds, aes(x=Coles, y=Woolworths, colour = ds$`Allocated Category`))
+wwVcoles + 
+  geom_point() + 
+  labs(title = 'Woolworths versus Coles Full Price Scatter Plot',  
+       y = 'Woolworths Items (AUD)', 
+       x = 'Coles Items (AUD)') +
+  theme(legend.title = element_blank())
+
+
+lm_eqn <- function(ds){
+  m <- lm(Woolworths ~ Coles, ds);
+  eq <- substitute(italic(Woolworths) == a + b %.% italic(Coles)*","~~italic(r)^2~"="~r2, 
+       list(a = format(coef(m)[1], digits = 2), 
+            b = format(coef(m)[2], digits = 2), 
+            r2 = format(summary(m)$r.squared, digits = 3)))
+    as.character(as.expression(eq));
+}
+
+m <- lm(Woolworths ~ Coles, ds)
+r2 <- format(summary(m)$r.squared, digits = 3)
+```
+
+
+```{r}
+wwVcoles <- ggplot(data=ds, aes(x=Coles, y=Woolworths, colour = ds$`Allocated Category`))
+wwVcoles + 
+  stat_smooth(method = "lm", col = "black", size = 0.5) +
+  geom_point() + 
+  labs(title = 'Woolworths versus Coles Full Price Scatter Plot',  
+       y = 'Woolworths Items (AUD)', 
+       x = 'Coles Items (AUD)') +
+  theme(legend.title = element_blank()) +
+  annotate("text", x = 8, y = 27, label = "R Squared") + 
+  annotate("text", x = 8, y = 24, label = format(summary(lm(Woolworths ~ Coles, data = ds))$r.squared, digits = 3))
+
+summary(lm(Woolworths ~ Coles, data = ds))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
