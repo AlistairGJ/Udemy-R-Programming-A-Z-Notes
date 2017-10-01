@@ -65,6 +65,7 @@ ggplot(data=ds, aes(x=ds$'Allocated Category', y=Coles, size = Amount, colour = 
 colesHist <- ggplot(data=ds, aes(x=ds$'Allocated Category', y=Coles, fill = ds$`Allocated Category`))
 colesHist + geom_boxplot() + theme(legend.title=element_blank()) + labs(title = "test", x = "xtest") 
 ```
+
 ```{r}
 colesSaleHist <- ggplot(data=ds, aes(x=ds$'Allocated Category', y=ds$`Coles Sale`, colour = ds$`Allocated Category`))
 colesSaleHist + geom_jitter(size = 0.6) + geom_boxplot(alpha = 0.5) + theme(legend.title=element_blank()) + labs(title = "test", x = "xtest")
@@ -73,12 +74,47 @@ colesSaleHist + geom_jitter(size = 0.6) + geom_boxplot(alpha = 0.5) + theme(lege
 
 ## LAYERS + Geometry + Colour (inside) + Labels
 ```{r}
-colesHist <- ggplot(data=ds, aes(x=ds$'Allocated Category', y=Coles, fill = ds$`Allocated Category`))
-test1 <- colesHist + geom_boxplot() + theme(legend.title=element_blank()) + labs(title = "test", x = "xtest") 
+colesHist <- ggplot(data=ds, aes(x=ds$'Allocated Category', y=Coles, fill = ds$`Allocated Category`)) + geom_boxplot() + theme(legend.title=element_blank()) + labs(title = NULL,  x = "Coles", y = NULL) + coord_flip()
 ```
+
+```{r}
+colesSaleHist <- ggplot(data=ds, aes(x=ds$'Allocated Category', y=ds$`Coles Sale`, fill = ds$`Allocated Category`)) + geom_boxplot() + theme(legend.title=element_blank()) + labs(title = NULL,  x = NULL, y = NULL) + coord_flip()
+```
+
+```{r}
+wwHist <- ggplot(data=ds, aes(x=ds$'Allocated Category', y=Woolworths, fill = ds$`Allocated Category`)) + geom_boxplot() + theme(legend.title=element_blank()) + labs(title = NULL,  x = NULL, y = NULL) + coord_flip()
+```
+
+```{r}
+wwSaleHist <- ggplot(data=ds, aes(x=ds$'Allocated Category', y=ds$`Woolworths Sale`, fill = ds$`Allocated Category`)) + geom_boxplot() + theme(legend.title=element_blank()) + labs(title = NULL, x = NULL, y = NULL) + coord_flip()
+```
+
+```{r}
+grid.arrange(colesHist, colesSaleHist, wwHist, wwSaleHist, nrow = 4) 
+#How do you make the absolute size bigger?!?
+#theme(plot.margin = unit(c(40, 40, 10, 10)))
+```
+
+```{r}
+facet_grid(colesHist, colesSaleHist, wwHist, wwSaleHist) 
+#How do you make the absolute size bigger?!?
+#theme(plot.margin = unit(c(40, 40, 10, 10)))
+```
+
+
+```{r}
+grid.arrange(colesHist, colesSaleHist, widths = c(15), heights = c(10, 10), nrow = 2)
+#How do you make the absolute size bigger?!?
+```
+
+```{r}
+grid.arrange(colesHist, colesSaleHist, widths = c(15), heights = c(10, 10), nrow = 2)
+#How do you make the absolute size bigger?!?
+```
+
 ```{r}
 colesSaleHist <- ggplot(data=ds, aes(x=ds$'Allocated Category', y=ds$`Coles Sale`, colour = ds$`Allocated Category`))
-test2 <- colesSaleHist + geom_jitter(size = 0.6) + geom_boxplot(alpha = 0.5) + theme(legend.title=element_blank()) + labs(title = "test", x = "xtest")
+test2 <- colesSaleHist + geom_jitter(size = 0.6) + geom_boxplot(alpha = 0.5) + theme(legend.title=element_blank()) + labs(title = "test", x = "xtest") + coord_flip()
 ```
 
 ```{r}
@@ -91,11 +127,18 @@ histAll <- ggplot(data=ds, aes(x=ds$Coles, fill = ds$`Allocated Category`))
 histAll + geom_histogram() + theme(legend.title=element_blank()) + labs(title = "test", x = "xtest") + facet_grid(ds$`Allocated Category`~.)
 ```
 
+```{r}
+#Exploring Unit and Amount - Stacked Histogram
+ <- ggplot(data=ds, aes(x=ds$Coles, fill = ds$`Allocated Category`))
+histAll + geom_histogram() + theme(legend.title=element_blank()) + labs(title = "test", x = "xtest") + facet_grid(ds$`Allocated Category`~.)
+```
 
 
 
+```{r}
+ggplot(data=sugarySnack_data, aes(x=sugarySnack_data$'Allocated Category', y=sugarySnack_data$Coles, fill = ds$`Allocated Category`)) + geom_boxplot() + theme(legend.title=element_blank()) + labs(title = NULL, x = NULL, y = NULL) + coord_flip()
 
-
+```
 
 
 
