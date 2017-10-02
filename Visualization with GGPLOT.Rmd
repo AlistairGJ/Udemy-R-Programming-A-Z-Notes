@@ -87,6 +87,11 @@ wwHist <- ggplot(data=ds, aes(x=ds$'Allocated Category', y=Woolworths, fill = ds
 
 ```{r}
 wwSaleHist <- ggplot(data=ds, aes(x=ds$'Allocated Category', y=ds$`Woolworths Sale`, fill = ds$`Allocated Category`)) + geom_boxplot() + theme(legend.title=element_blank()) + labs(title = NULL, x = "WW Sale", y = NULL) + coord_flip()
+
+#aes_position - Position related aesthetics: x, y, xmin, xmax, ymin, ymax, xend, yend
+
+
+
 ```
 
 ```{r}
