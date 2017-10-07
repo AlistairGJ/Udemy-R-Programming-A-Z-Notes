@@ -146,8 +146,41 @@ ggplot(data=sugarySnack_data, aes(x=sugarySnack_data$'Allocated Category', y=sug
 ```
 
 
+```{r}
+#Exploring Unit and Amount - Data Selection
+library(car)
+sugarySnack_data$`Woolworths Sale` %>% qqPlot(dist="norm")
+```
 
 
+
+```{r}
+sugarySnack_data$Per1000gPrice_WWSale %>% qqPlot(dist="norm")
+```
+
+```{r}
+sugarySnack_data$Woolworths %>% qqPlot(dist="norm")
+```
+
+
+
+```{r}
+sugarySnack_data$Per1000gPrice_WW %>% qqPlot(dist="norm")
+```
+
+
+## Padding and Scaling
+
+```{r}
+colesHist <- ggplot(data=ds, aes(x=ds$'Allocated Category', y=Coles, fill = ds$`Allocated Category`)) + geom_boxplot() + theme(legend.title=element_blank()) + labs(title = NULL,  x = "Coles", y = NULL) + guides(fill = FALSE) + coord_flip() #Free scaling and padding
+colesSaleHist <- ggplot(data=ds, aes(x=ds$'Allocated Category', y=ds$`Coles Sale`, fill = ds$`Allocated Category`)) + geom_boxplot() + theme(legend.title=element_blank()) + labs(title = NULL,  x = "Coles Sale", y = NULL) + guides(fill = FALSE) + coord_flip() + ylim(0,60) #Scaling with padding
+wwHist <- ggplot(data=ds, aes(x=ds$'Allocated Category', y=Woolworths, fill = ds$`Allocated Category`)) + geom_boxplot() + theme(legend.title=element_blank()) + labs(title = NULL,  x = "WW", y = NULL) + guides(fill = FALSE) + coord_flip() + ylim(0,60)
+wwSaleHist <- ggplot(data=ds, aes(x=ds$'Allocated Category', y=ds$`Woolworths Sale`, fill = ds$`Allocated Category`)) + geom_boxplot() + theme(legend.title=element_blank()) + labs(title = NULL, x = "WW Sale", y = NULL) + guides(fill = FALSE) + coord_flip() + scale_y_continuous(limits = c(0,60), expand = c(0, 0)) #Set scaling and padding
+```
+
+```{r}
+grid.arrange(colesHist, colesSaleHist, wwHist, wwSaleHist, nrow = 4)
+```
 
 
 
